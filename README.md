@@ -4,6 +4,7 @@
 * id
 * name    彩种名字
 * title   彩种标识
+
 #####表名
 * gamelist -> game_list
 * lotteryrecord -> bet_record
@@ -29,6 +30,7 @@ bet_record.wanfa_id     玩法id
 * game_wanfa
 
 ---
+
 #10.27
 ##### 新增数据库字段
 * game_list.api_url             开奖API接口地址
