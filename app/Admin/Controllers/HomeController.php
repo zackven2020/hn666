@@ -9,6 +9,7 @@ use Dcat\Admin\Layout\Column;
 use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Layout\Row;
 
+
 class HomeController extends BaseController
 {
     public function index(Content $content)
@@ -18,8 +19,10 @@ class HomeController extends BaseController
             ->description('在线看板')
             ->body(function (Row $row) {
                 $row->column(6, function (Column $column) {
+
                     $column->row(Dashboard::title());
                     $column->row(new Examples\Tickets());
+                    $column->row(new Examples\Ticketser());
                 });
 
                 $row->column(6, function (Column $column) {

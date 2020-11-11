@@ -36,7 +36,7 @@
             <div class="text-center mb-1">
                 <h1 class="mb-3 mt-2 text-white">數據概覽</h1>
                 <div class="links">
-                    <a href="javascript:void(0);">已開設<span> 150 </span>天</a>
+                    <a href="javascript:void(0);">已開設 <span> 150 </span>天</a>
                     <a href="javascript:void(0);">縂充值 <span> 10000分 </span></a>
                     <a href="javascript:void(0);">縂盈利 <span> 50000分 </span></a>
                     <a href="javascript:void(0);">當前層級 <span> 團長 </span></a>

@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use Dcat\Admin\Widgets\Metrics\RadialBar;
 use Illuminate\Http\Request;
 
-class Tickets extends RadialBar
+class Ticketser extends RadialBar
 {
     /**
      * 初始化卡片内容
