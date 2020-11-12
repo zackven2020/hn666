@@ -19,6 +19,11 @@ class Agent extends Model
         return null;
     }
 
+    public function member()
+    {
+        return $this->hasMany(Member::class, 'agent_id', 'id');
+    }
+
     /**
      * 获取子模块
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

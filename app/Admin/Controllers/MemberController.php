@@ -5,12 +5,15 @@ namespace App\Admin\Controllers;
 use App\Admin\Metrics\Examples\NewDevices;
 use App\Admin\Metrics\Examples\NewUsers;
 use App\Admin\Repositories\Member;
+use App\Models\Agent;
 use App\Models\System;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Layout\Row;
 use Dcat\Admin\Show;
+
+
 
 class MemberController extends BaseController
 {
@@ -109,6 +112,7 @@ class MemberController extends BaseController
             $form->text('account')->required();
             $form->password('password')->required();
             $form->select('status')->options([1=>'正常','凍結錢包','凍結賬號'])->default(1);
+            $form->select('agent_id')->options(Agent::all()->pluck('name', 'id')->toArray())->default(1);
             $form->text('realname');
             $form->text('bankcard');
             $form->text('banktype');

@@ -8,6 +8,12 @@ use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
 use Dcat\Admin\Http\Controllers\AdminController;
 use Illuminate\Support\Str;
+use Large\Zhengdada\Functions;
+use Cache;
+use App\Models\Member;
+use App\Admin\Modal\AgentDetailsModal;
+
+
 
 class AgentController extends AdminController
 {
@@ -19,10 +25,32 @@ class AgentController extends AdminController
     protected function grid()
     {
 
-        return Grid::make(new Agent(), function (Grid $grid) {
+        return Grid::make(new Agent(['member']), function (Grid $grid) {
             $grid->quickSearch(['id','name','title','invate_url'])->placeholder('ID，名字，标记，邀请码');
             $grid->column('id')->bold()->sortable();
-            $grid->title->tree(); // 开启树状表格功能
+            $grid->title->modal(AgentDetailsModal::make(['post_type'=> 2]));; // 开启树状表格功能
+            //$grid->title->tree(); // 开启树状表格功能
+
+            $grid->column('agency', '代理人数')->display(function () {
+                $agentAll = Cache::remember('agent_cache', 20, function(){
+                    return $this->all();
+                });
+                return collect(getMemberTeamId($agentAll, $this->id))->count() - 1;
+            });
+
+            $grid->column('member', '直推会员')->display(function ($value) {
+                return collect($value)->count();
+            });
+
+            $grid->column('team', '团队人数')->display(function ($value) {
+                $agentAll = Cache::remember('agent_cache', 20, function(){
+                    return $this->all();
+                });
+                $memberAll = Cache::remember('member_cache', 20, function(){
+                    return Member::get();
+                });
+                return collect($memberAll)->whereIn('agent_id', getMemberTeamId($agentAll, $this->id))->count();
+            });
 
             $grid->column('name');
             $grid->column('level');

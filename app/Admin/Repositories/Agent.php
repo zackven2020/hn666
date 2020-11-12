@@ -13,4 +13,8 @@ class Agent extends EloquentRepository
      * @var string
      */
     protected $eloquentClass = Model::class;
+
+
+
+
 }

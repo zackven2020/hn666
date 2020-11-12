@@ -9,6 +9,20 @@
     <title>Document</title>
 </head>
 <body style="text-align: center;">
+
+<table>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+
 <h1 style="font-weight: bold;">404 Not Found</h1>
 <hr style="color: grey;border: 1px solid grey;">
 <p>nginx/1.7.4</p>
