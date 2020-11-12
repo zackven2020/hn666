@@ -30,8 +30,9 @@ class AgentController extends AdminController
             $grid->column('id')->bold()->sortable();
             $grid->title->modal(AgentDetailsModal::make(['post_type'=> 2]));; // 开启树状表格功能
             //$grid->title->tree(); // 开启树状表格功能
+            $grid->tableCollapse(false);
 
-            $grid->column('agency', '代理人数')->display(function () {
+            $grid->column('agent', '代理人数')->display(function () {
                 $agentAll = Cache::remember('agent_cache', 20, function(){
                     return $this->all();
                 });
@@ -47,7 +48,7 @@ class AgentController extends AdminController
                     return $this->all();
                 });
                 $memberAll = Cache::remember('member_cache', 20, function(){
-                    return Member::get();
+                    return Member::all();
                 });
                 return collect($memberAll)->whereIn('agent_id', getMemberTeamId($agentAll, $this->id))->count();
             });

@@ -7,7 +7,7 @@
  * @param $id
  * @param $times 传过来的时间
  */
-function getMemberTeamId($members, $id , $pid = 'parent_id'){
+function getMemberTeamId($members, int $id , $pid = 'parent_id'){
     $Teams = array($id);//最终结果
     $mids = array($id);//第一次执行时候的用户id
     do{
@@ -18,7 +18,7 @@ function getMemberTeamId($members, $id , $pid = 'parent_id'){
                 if($memeber[$pid] == $v){
                     $Teams[]        = $memeber['id'];//找到我的下级立即添加到最终结果中
                     $othermids[]    = $memeber['id'];//将我的下级id保存起来用来下轮循环他的下级
-                    unset($members[$k]);// 从大数组里删除 ，运行要快100倍
+                    //unset($members[$k]);// 从大数组里删除 ，运行要快100倍
                     $state=true;
                 }
             }
