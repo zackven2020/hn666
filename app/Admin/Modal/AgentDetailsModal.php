@@ -20,12 +20,12 @@ class AgentDetailsModal extends LazyRenderable
         // 获取ID
         $id = $this->key;
 
-        $agentAll = Cache::remember('agent_cache', 60, function(){
-            return Agent::get();
-        });
-        $memberAll = Cache::remember('member_cache', 60, function(){
-            return Member::get();
-        });
+        // 所有代理帐号
+        $agentAll = getAgentCache();
+
+        // 所有会员帐号
+        $memberAll = getMemberCache();
+
         //今日充值
         $dayDeposit = Cache::remember('deposit_cache', 60, function(){
             return Deposit::whereBetween('created_at',  [

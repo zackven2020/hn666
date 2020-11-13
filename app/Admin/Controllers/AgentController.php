@@ -28,7 +28,7 @@ class AgentController extends AdminController
         return Grid::make(new Agent(['member']), function (Grid $grid) {
             $grid->quickSearch(['id','name','title','invate_url'])->placeholder('ID，名字，标记，邀请码');
             $grid->column('id')->bold()->sortable();
-            $grid->title->modal(AgentDetailsModal::make(['post_type'=> 2]));; // 开启树状表格功能
+            $grid->title->modal(AgentDetailsModal::make());; // 开启树状表格功能
             //$grid->title->tree(); // 开启树状表格功能
             $grid->tableCollapse(false);
 

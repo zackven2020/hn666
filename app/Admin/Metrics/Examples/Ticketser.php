@@ -69,8 +69,6 @@ class Ticketser extends RadialBar
             $deposit->sum('money').'/'.$deposit->count(),
             $withdraw->sum('money').'/'.$withdraw->count()
         );
-        // 图表数据
-        $this->withChart(($actived_member->count()/$all)*100);
     }
 
 
@@ -99,10 +97,154 @@ class Ticketser extends RadialBar
     {
         return $this->content(
             <<<HTML
-<div class="d-flex flex-column flex-wrap text-center">
-    <h1 class="font-lg-2 mt-2 mb-0">{$content}</h1>
-    <small>活躍會員數</small>
-</div>
+<div class="row">
+                <style>
+                .justify-content-center{
+                    flex:0.1;
+                }
+                .rows{
+                    display:flex;
+                    margin-left: 30px;
+                }
+                .cards{
+                    width:200px;
+                    display:flex;
+                    margin-bottom: 1rem !important;
+                }
+                .card-header{
+                    margin-bottom: 0.8rem;
+                }
+                .metrics {
+                    display:flex;
+                    justify-content:flex-end;
+                    padding:4px;
+                    margin-bottom: 0.6rem;
+                    text-align: center;
+                }
+                .product-result {
+                    flex:2;
+                }
+                .product-result:first-child{
+                    text-align: left;
+                }
+                </style>
+              <div class="col-md-12 rows">
+                <div id="metric-card-qSJoBMP9" class="cards">
+                  <div class="card-header d-flex justify-content-between align-items-start pb-0">
+                    <div>
+                      <h4 class="card-title mb-1">代理详情</h4>
+                      <div class="metric-header"></div>
+                    </div>
+                  </div>
+                  <div class="metric-content">
+                    <div class="metrics">
+                      <div class="product-result">
+                        <i class="fa fa-circle-o text-bold-700 text-primary"></i>
+                        <span class="">代理人数</span>
+                      </div>
+                      <div class="product-result">
+                         <span>111</span>
+                      </div>
+                    </div>
+                    <div class="metrics">
+                      <div class="product-result">
+                        <i class="fa fa-circle-o text-bold-700 text-warning"></i>
+                        <span class="">直推会员</span>
+                      </div>
+                      <div class="product-result">
+                         <span>222</span>
+                      </div>
+                    </div>
+                    <div class="metrics">
+                      <div class="product-result">
+                        <i class="fa fa-circle-o text-bold-700 text-danger"></i>
+                        <span class="">团队人数</span>
+                      </div>
+                      <div class="product-result">
+                         <span>333</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div id="metric-card-qSJoBMP9" class="cards" >
+                  <div class="card-header d-flex justify-content-between align-items-start pb-0">
+                    <div>
+                      <h4 class="card-title mb-1">金额详情</h4>
+                      <div class="metric-header"></div>
+                    </div>
+                  </div>
+                  <div class="metric-content">
+                    <div class="metrics">
+                      <div class="product-result">
+                        <i class="fa fa-circle-o text-bold-700 text-primary"></i>
+                        <span class="">代理人数</span>
+                      </div>
+                      <div class="product-result">
+                         <span>233</span>
+                      </div>
+                    </div>
+                    <div class="metrics">
+                      <div class="product-result">
+                        <i class="fa fa-circle-o text-bold-700 text-warning"></i>
+                        <span class="">代理人数</span>
+                      </div>
+                      <div class="product-result">
+                         <span>233</span>
+                      </div>
+                    </div>
+                    <div class="metrics">
+                      <div class="product-result">
+                        <i class="fa fa-circle-o text-bold-700 text-danger"></i>
+                        <span class="">代理人数</span>
+                      </div>
+                      <div class="product-result">
+                         <span>233</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div id="metric-card-qSJoBMP9" class="cards" >
+                  <div class="card-header d-flex justify-content-between align-items-start pb-0">
+                    <div>
+                      <h4 class="card-title mb-1">充值详情</h4>
+                      <div class="metric-header"></div>
+                    </div>
+                  </div>
+                  <div class="metric-content">
+                    <div class="metrics">
+                      <div class="product-result">
+                        <i class="fa fa-circle-o text-bold-700 text-primary"></i>
+                        <span class="">当日总存款</span>
+                      </div>
+                      <div class="product-result">
+                         <span>444</span>
+                      </div>
+                    </div>
+                    <div class="metrics">
+                      <div class="product-result">
+                        <i class="fa fa-circle-o text-bold-700 text-warning"></i>
+                        <span class="">当日总取款</span>
+                      </div>
+                      <div class="product-result">
+                         <span>555</span>
+                      </div>
+                    </div>
+                    <div class="metrics">
+                      <div class="product-result">
+                        <i class="fa fa-circle-o text-bold-700 text-danger"></i>
+                        <span class="">当日盈亏</span>
+                      </div>
+                      <div class="product-result">
+                         <span>666</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
 HTML
         );
     }

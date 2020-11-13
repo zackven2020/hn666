@@ -1,6 +1,14 @@
 <?php
 
 
+use Carbon\Carbon;
+use Cache;
+use App\Models\Agent;
+use App\Models\Member;
+
+
+
+
 /**
  * 计算自身下的所有会员,返回所有ID
  * @param $members
@@ -28,6 +36,51 @@ function getMemberTeamId($members, int $id , $pid = 'parent_id'){
 
     return $Teams;
 }
+
+
+/***
+ * 获取几号的开启时间日期 2020-11-13 00:00:00
+ * @param int $num 往后几天
+ * @return string
+ */
+function getDayStartDate($num = 0){
+    return Carbon::today()->subDays($num)->toDateTimeString();
+}
+
+
+/***
+ * 获取几号的结束时间日期
+ * 2020-11-13 23:59:59
+ * @param int $num 往后几天
+ * @return string
+ */
+function getDayEndDate($num = 0){
+    return Carbon::today()->endofDay($num)->toDateTimeString();
+}
+
+
+/***
+ * 获取所有代理帐号
+ * @return mixed
+ */
+function getAgentCache(){
+    return Cache::remember('agent_cache', 60, function(){
+        return Agent::get();
+    });
+}
+
+/***
+ * 获取所有会员帐号
+ * @return mixed
+ */
+function getMemberCache(){
+    return Cache::remember('member_cache', 60, function(){
+        return Member::get();
+    });
+}
+
+
+
 
 
 
