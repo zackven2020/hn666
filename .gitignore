@@ -5,6 +5,7 @@
 /storage/framework/cache/*  // 项目框架缓存
 /storage/framework/sessions/*
 /storage/framework/views/*
+/storage/debugbar/*
 /storage/logs/*				// 日志
 .idea						// IDE 文件
 .settings/

@@ -38,29 +38,11 @@ trait WithdrawTraits
             }
             $withdraw->whereBetween('created_at', [
                 getDayStartDate($start), getDayEndDate($end)
-            ])->where('user_id', self::getMemberId($agentId));
+            ])->where('user_id', MemberTraits::getMemberId($agentId));
         }
         return $withdraw->where('status', 1)->pluck('money')->sum();
     }
 
-
-    /***
-     * 获取指定代理下的出金会员ID
-     * @param $agentId
-     * @return \Illuminate\Support\Collection|\Tightenco\Collect\Support\Collection
-     */
-    public static function getMemberId($agentId)
-    {
-        // 所有代理帐号
-        $agentAll = getAgentCache();
-        // 所有会员帐号
-        $memberAll = getMemberCache();
-
-        $agentIds = getMemberTeamId($agentAll, $agentId);
-        $member   = collect($memberAll)->whereIn('agent_id', $agentIds);
-
-        return $member->pluck('id');
-    }
 
 
     
