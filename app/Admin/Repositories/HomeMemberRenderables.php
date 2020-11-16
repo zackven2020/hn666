@@ -12,6 +12,8 @@ use Illuminate\Contracts\Support\Renderable;
 use App\Models\Traits\DepositTraits;
 use App\Models\Traits\WithdrawTraits;
 use App\Models\Traits\MemberTraits;
+use App\Models\Traits\AgentInfoTraits;
+
 
 
 
@@ -34,7 +36,7 @@ class HomeMemberRenderables implements Renderable
         // 系统会员今日出金
         if (! verifSysCacheArray('day_withdraw')) { //判断有没有对应出金缓存
             $totalWithdraw = setSysCacheArray([
-                'day_withdraw' => WithdrawTraits::todayWithdraw(null, true)
+                'day_withdraw' => AgentInfoTraits::dayAgentInfo(2, false)->sum('day_withdraw')
             ]);// 存入缓存
         }
 
@@ -51,10 +53,11 @@ class HomeMemberRenderables implements Renderable
                 'total_deposit' => DepositTraits::todayDeposit()
             ]);// 存入缓存
         }
+
         // 系统会员今日入金
         if (! verifSysCacheArray('day_deposit')) { //判断有没有对应出金缓存
             $totalWithdraw = setSysCacheArray([
-                'day_deposit' => DepositTraits::todayDeposit(null, true)
+                'day_deposit' => AgentInfoTraits::dayAgentInfo(null, false)->sum('day_deposit')
             ]);// 存入缓存
         }
         // 系统会员总数
