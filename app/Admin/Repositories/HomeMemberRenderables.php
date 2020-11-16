@@ -36,7 +36,7 @@ class HomeMemberRenderables implements Renderable
         // 系统会员今日出金
         if (! verifSysCacheArray('day_withdraw')) { //判断有没有对应出金缓存
             $totalWithdraw = setSysCacheArray([
-                'day_withdraw' => AgentInfoTraits::dayAgentInfo(2, false)->sum('day_withdraw')
+                'day_withdraw' => AgentInfoTraits::dayAgentInfo(null, false)->sum('day_withdraw')
             ]);// 存入缓存
         }
 

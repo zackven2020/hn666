@@ -100,7 +100,7 @@ return [
         ],
 
         'member' => [
-            'provider' => 'users',
+            'provider' => 'member',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

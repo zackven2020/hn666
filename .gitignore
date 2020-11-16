@@ -1,14 +1,21 @@
-/vendor/*           // 该目录下包含Laravel源代码和第三方依赖包
-.env				// 本地环境配置
-/node_modules		// 若有前端框架目录
-/public/upload		// 若有开发中上传的文件不做版本
-/storage/framework/cache/*  // 项目框架缓存
+# 该目录下包含Laravel源代码和第三方依赖包
+/vendor/*
+# 本地环境配置
+.env
+# 若有前端框架目录
+/node_modules
+# 若有开发中上传的文件不做版本
+/public/upload
+# 项目框架缓存
+/storage/framework/cache/*
 storage/*
 /storage/framework/sessions/*
 /storage/framework/views/*
 /storage/debugbar/*
-/storage/logs/*				// 日志
-.idea						// IDE 文件
+# 日志
+/storage/logs/*
+# IDE 文件
+.idea
 .settings/
 *.iml
 *.ipr
@@ -16,4 +23,5 @@ storage/*
 *.zip
 *.tar.gz
 *.sql
-.DS_Store					// Mac 系统生成的隐藏文件
+# Mac 系统生成的隐藏文件
+.DS_Store
