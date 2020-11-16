@@ -14,6 +14,6 @@ class BannerController extends Controller
             'https://tradeimg.500.com/upimages/wap/img/20200902135007613.png',
             'https://tradeimg.500.com/upimages/wap/img/20200922111359911.jpg'
             ];
-        return response()->json(['code' => 200,'message' => '红牛彩票提供','data' => $banner]);
+        return response()->success('平台轮播图',$banner);
     }
 }

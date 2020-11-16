@@ -13,6 +13,6 @@ class NoticeController extends Controller
             '英超:丁丁传射福登热苏斯破门 曼城3-1狼队开门红',
             '冰铃铛：克拉斯主场制胜 斯拉维亚稳健可信',
             ];
-        return response()->json(['code' => 200,'message' => '红牛彩票提供','data' => $notice]);
+        return response()->success('平台公告信息',$notice);
     }
 }

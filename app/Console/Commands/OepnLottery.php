@@ -19,7 +19,7 @@ class OepnLottery extends Command
      * @var string
      */
     protected $signature = 'lottery:open';
-
+    
     /**
      * The console command description.
      *
@@ -44,20 +44,44 @@ class OepnLottery extends Command
      */
     public function handle()
     {
-        while (true){
-            try{
-                $game_list = $this->get_url_list();
-                $result_data = $this->multi_curl($game_list);
-                $this->save_to_database($result_data);
-                Cache::put('cli_api_urls',time());
-                Log::channel('api_urls')->info(Cache::get('cli_api_urls').' -- 采集完毕');
-            }catch (\Exception $exception){
-                Log::channel('cli_works')->error($exception);
-                Log::channel('cli_works')->error(json_encode($result_data));
-            }
-            sleep(5);
+        //$this->kernel_log('定时任务获取结果 ===begin====');
+        //echo 444;die;
+        //while (true){
+        try{
+            $game_list = $this->get_url_list();
+            //$this->kernel_log('定时任务获取结 $game_list' . json_encode($game_list));
+            $result_data = $this->multi_curl($game_list);
+            $this->save_to_database($result_data);
+            Cache::put('cli_api_urls',time());
+            Log::channel('api_urls')->info(Cache::get('cli_api_urls').' -- 采集完毕');
+        }catch (\Exception $exception){
+            Log::channel('cli_works')->error($exception);
+            Log::channel('cli_works')->error(json_encode($result_data));
         }
+        //$this->kernel_log('定时任务获取结 ===end====');
+            //sleep(5);
+        //}
     }
+    
+    public function kernel_log($msg){
+        //一定加$monolog这两句，不然会打印两份日志
+        $monolog = Log::getMonolog();
+        $monolog->popHandler();
+        //  Log::useDailyFiles(storage_path('logs/error/test.log'));
+        //  Log::useFiles(storage_path('logs/kernel_log/kernel.log'));
+         Log::useDailyFiles(storage_path('/logs/kernel_log/kernel.log'));
+         
+        //  Log::emergency("系统挂掉了");
+        //  Log::alert("数据库访问异常");
+        //  Log::critical("系统出现未知错误");
+        //  Log::error("指定变量不存在");
+        //  Log::warning("该方法已经被废弃");
+        //  Log::notice("用户在异地登录");
+        //  Log::debug("调试信息");
+         Log::info($msg);
+        
+     }
+
 
     /**
      * 获取需要被执行的 URLS

@@ -18,10 +18,11 @@ class AuthorizationController extends Controller
         $credentials['password'] = $request->password;
 
         if(!$token = Auth::guard('api')->attempt($credentials)){
-            throw new AuthenticationException('用户名或密码错误');
+            return response()->error('用户名或密码错误');
+        }else{
+            return response()->success('登录成功',['access_token' => $token]);
         }
-        return response()->json(['code' => 200,'message' => '红牛彩票提供','access_token' => $token]);
-        //return $this->responseWithToken($token)->setStatusCode(200);
+        
     }
 
     public function update()
@@ -37,7 +38,7 @@ class AuthorizationController extends Controller
     }
 
     protected function responseWithToken($token){
-        return response()->json([
+        return response()->success('红牛彩票',[
             'access_token' => $token,
             'token_type' => 'Bearer',
             'expires_in' => Auth::guard('api')->factory()->getTTL() * 60

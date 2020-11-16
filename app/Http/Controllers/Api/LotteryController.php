@@ -34,7 +34,7 @@ class LotteryController extends Controller
                 ->get()->toArray();
             $this->setCache('menu_lists',$menu,60);
         }
-        return response()->json(['code' => 200,'message' => '红牛彩票提供','data' => $menu]);
+        return response()->json('左边菜单',$menu);
     }
 
     /**
@@ -51,7 +51,7 @@ class LotteryController extends Controller
             $this->setCache('recommend_lists',$menu);
         }
 
-        return response()->json(['code' => 200,'message' => '红牛彩票提供','data' => $menu]);
+        return response()->success('首页推荐彩票',$menu);
     }
 
     /**
@@ -67,9 +67,9 @@ class LotteryController extends Controller
         }
         
         $lastRecord = ['issue' => $openData['term'], 'data' => $data,'digits' => $openData['number'],'lotteryType' => $title];
-        return response()->json(['code' => 200,'message' => '红牛彩票提供','data' => [
+        return response()->success('彩票详情',[
             'lotteryName' => $lotteryInfo['name'],
-            'lastRecord' => $lastRecord]]);
+            'lastRecord' => $lastRecord]);
     }
 
     /**
@@ -113,7 +113,7 @@ class LotteryController extends Controller
             $this->setCache($cache_name,$data);
         }
 
-        return response()->json(['code' => 200,'message' => '红牛彩票提供','data' => $data]);
+        return response()->success('玩法规则',$data);
     }
     
     /**
@@ -121,6 +121,6 @@ class LotteryController extends Controller
      */
     public function currentSaleIssue(){
         $data = GameList::calcNextOpenIssue(\request()->get('lottery'));
-        return response()->json(['code' => 200,'message' => '红牛彩票提供','data' => $data]);
+        return response()->success('获取下一次开奖期号',$data);
     }
 }
