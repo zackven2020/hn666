@@ -21,7 +21,7 @@ trait AgentInfoTraits
     }
 
 
-    protected function dayAgentInfo($agentId = null, $time = true)
+    public static function dayAgentInfo($agentId = null, $time = true)
     {
         $agentInfo = collect(self::agentInfo());
 

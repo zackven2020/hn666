@@ -38,5 +38,24 @@ trait MemberTraits
 
         return $member->pluck('id');
     }
+
+
+
+    /***
+     * 查询系统总入金和代理下的会员当日入金
+     * @param null $agentId 代理ID
+     * @return mixed
+     */
+    public static function todayMember($time = null)
+    {
+        $member = collect(self::member());
+
+        if ($time) {
+            $member = $member->whereBetween('created_at', [
+                getDayStartDate(), getDayEndDate()
+            ]);
+        }
+        return $member->count();
+    }
     
 }

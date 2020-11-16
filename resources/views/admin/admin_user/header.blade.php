@@ -10,7 +10,7 @@
             <div class="metric-content">
                 <div class="d-flex justify-content-between align-items-center mt-1">
                     <div class="text-left">
-                        <h1 class="ml-1 font-lg-1">132456 $</h1></div>
+                        <h1 class="ml-1 font-lg-1">{{ $totalWithdraw['total_deposit'] }} ￥</h1></div>
                 </div>
             </div>
         </div>
@@ -68,7 +68,7 @@
             <div class="metric-content">
                 <div class="d-flex justify-content-between align-items-center mt-1">
                     <div class="text-left">
-                        <h1 class="ml-1 font-lg-1">{{ $withdraw }} ￥</h1></div>
+                        <h1 class="ml-1 font-lg-1">{{ $totalWithdraw['total_withdraw'] }} ￥</h1></div>
                 </div>
             </div>
         </div>
@@ -86,7 +86,7 @@
             <div class="metric-content">
                 <div class="d-flex justify-content-between align-items-center mt-1">
                     <div class="text-left">
-                        <h1 class="ml-1 font-lg-1">2222</h1></div>
+                        <h1 class="ml-1 font-lg-1">{{ $totalWithdraw['total_member'] }}</h1></div>
                 </div>
             </div>
         </div>
@@ -103,7 +103,7 @@
             <div class="metric-content">
                 <div class="d-flex justify-content-between align-items-center mt-1">
                     <div class="text-left">
-                        <h1 class="ml-1 font-lg-1">33333 $</h1></div>
+                        <h1 class="ml-1 font-lg-1">{{ $totalWithdraw['day_deposit'] }} ￥</h1></div>
                 </div>
             </div>
         </div>
@@ -120,7 +120,7 @@
             <div class="metric-content">
                 <div class="d-flex justify-content-between align-items-center mt-1">
                     <div class="text-left">
-                        <h1 class="ml-1 font-lg-1">4444 $</h1></div>
+                        <h1 class="ml-1 font-lg-1">{{ $totalWithdraw['day_withdraw'] }} ￥</h1></div>
                 </div>
             </div>
         </div>
@@ -130,14 +130,14 @@
         <div id="metric-card-EfSF6Hd9" class="card" user="" style=" min-height:130px;">
             <div class="card-header d-flex justify-content-between align-items-start pb-0">
                 <div>
-                    <h4 class="card-title mb-1">55555</h4>
+                    <h4 class="card-title mb-1">今日注册会员</h4>
                     <div class="metric-header"></div>
                 </div>
             </div>
             <div class="metric-content">
                 <div class="d-flex justify-content-between align-items-center mt-1">
                     <div class="text-left">
-                        <h1 class="ml-1 font-lg-1">666666 </h1></div>
+                        <h1 class="ml-1 font-lg-1">{{ $totalWithdraw['day_member'] }} </h1></div>
                 </div>
             </div>
         </div>

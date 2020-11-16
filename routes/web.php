@@ -21,7 +21,9 @@ use App\Models\Traits\WithdrawTraits;
 
 Route::get('/', function ($id = 2) {
 
-    dd(WithdrawTraits::withdraw());
+    $a = ['a'=>123];
+
+    dd(\Cache::get('fdsafdsa'));
 
     dd(Carbon::today()->endofDay(0)->toDateTimeString());
 

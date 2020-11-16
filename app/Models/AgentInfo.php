@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class AgentInfo extends Model
 {
     use HasFactory;
+
+    protected $table = 'agent_info';
+
+
+
+
+
 }

@@ -2,10 +2,8 @@
 
 
 use Carbon\Carbon;
-use Cache;
 use App\Models\Agent;
 use App\Models\Member;
-
 
 
 
@@ -64,7 +62,7 @@ function getDayEndDate($num = 0){
  * @return mixed
  */
 function getAgentCache(){
-    return Cache::remember('agent_cache', 60, function(){
+    return \Cache::remember('agent_cache', 60, function(){
         return Agent::get();
     });
 }
@@ -74,12 +72,41 @@ function getAgentCache(){
  * @return mixed
  */
 function getMemberCache(){
-    return Cache::remember('member_cache', 60, function(){
+    return \Cache::remember('member_cache', 60, function(){
         return Member::get();
     });
 }
 
 
+/***
+ * 设置系统参数缓存
+ * @param array $arr
+ * @return mixed
+ */
+function setSysCacheArray(array $arr = []) {
+    $result =  \Cache::remember('set_cache_sys_array', 60, function(){
+        return [];
+    });
+    $arrResult = array_merge($result, $arr);
+    \Cache::put('set_cache_sys_array', $arrResult, 600);
+    return \Cache::get('set_cache_sys_array');
+}
+
+
+/***
+ * 检测系统是否有某个变量
+ * @param string $str
+ * @return mixed
+ */
+function verifSysCacheArray($str = '') {
+    $result = \Cache::get('set_cache_sys_array');
+
+    if (isset($result[$str])) {
+        return \Cache::get('set_cache_sys_array');
+    }
+
+    return null;
+}
 
 
 
