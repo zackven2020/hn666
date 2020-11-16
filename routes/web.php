@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Agent;
 use Carbon\Carbon;
 use App\Models\Deposit;
-
+use App\Models\Withdraw;
+use App\Models\Traits\WithdrawTraits;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,20 +21,11 @@ use App\Models\Deposit;
 
 Route::get('/', function ($id = 2) {
 
-    dd(Carbon::now()->toDateString(), Carbon::now()->toDateTimeString());
-    $agentAll = Cache::remember('agent_caches', 1, function(){
-        return Agent::get();
-    });
+    dd('fdsafdsafds');
+    $a = ['a'=>123];
 
-    $a = ['id'=>'aaa', 'parent_id'=>999];
+    dd(\Cache::get('fdsafdsa'));
 
+    dd(Carbon::today()->endofDay(0)->toDateTimeString());
 
-    dd($agentAll, 123, $a);
-    Cache::put('agent_cache', $as);
-
-    //$agentIds       = getMemberTeamId($agentAll, $id);
-    $a = getMemberTeamId($agentAll, $id);
-    $b = getMemberTeamId($agentAll, 2);
-    $c = getMemberTeamId($agentAll, $id);
-    dd($a, $b, $c, $id);
 });

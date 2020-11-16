@@ -8,6 +8,9 @@ use App\Http\Controllers\Controller;
 use Dcat\Admin\Layout\Column;
 use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Layout\Row;
+use App\Admin\Repositories\HomeMemberRenderables;
+
+
 
 
 class HomeController extends BaseController
@@ -21,8 +24,7 @@ class HomeController extends BaseController
                 $row->column(6, function (Column $column) {
 
                     $column->row(Dashboard::title());
-                    $column->row(new Examples\Tickets());
-                    $column->row(new Examples\Ticketser());
+                    $column->row(new HomeMemberRenderables());
                 });
 
                 $row->column(6, function (Column $column) {
