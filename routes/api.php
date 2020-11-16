@@ -68,7 +68,8 @@ Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function() {
     });
 
     //需要授权的接口
-    Route::middleware(['auth.jwt','throttle:' . config('api.throttling.access')])->group(function(){
+    Route::middleware(['auth.jwt', 'throttle:' . config('api.throttling.access')])->group(function(){
+
         // 订单
         Route::post('init-order', [OrderController::class,'initOrder'])->name('order.initOrder');
     });

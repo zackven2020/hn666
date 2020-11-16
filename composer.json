@@ -19,6 +19,7 @@
         "large/zhengdada": "^0.0.1",
         "mews/captcha": "^3.2",
         "overtrue/easy-sms": "^1.1",
+        "predis/predis": "~1.1",
         "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {

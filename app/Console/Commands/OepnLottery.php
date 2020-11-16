@@ -109,7 +109,7 @@ class OepnLottery extends Command
                         return $item;
                     }
                 })->filter()->pluck('api_url');
-            Cache::put($key_name,$redis_game_list,60*60);
+            Cache::put($key_name, $redis_game_list, 60*60);
         }
         return $redis_game_list;
     }

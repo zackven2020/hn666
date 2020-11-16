@@ -7,6 +7,8 @@ use Dcat\Admin\Traits\HasDateTimeFormatter;
 use Dcat\Admin\Traits\ModelTree;
 use Illuminate\Database\Eloquent\Model;
 
+
+
 class Agent extends Model
 {
 	use HasDateTimeFormatter,ModelTree;
@@ -17,6 +19,11 @@ class Agent extends Model
     public function getOrderColumn()
     {
         return null;
+    }
+
+    public function agentInfo()
+    {
+        return $this->hasMany(AgentInfo::class, 'agent_id', 'id');
     }
 
     public function member()
