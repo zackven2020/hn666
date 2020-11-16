@@ -27,14 +27,9 @@ trait DepositTraits
      * @param null $agentId 代理ID
      * @return mixed
      */
-    public static function todayDeposit($dayAgentInfo = null, $time = null)
+    public static function todayDeposit($time = null)
     {
         $deposit = collect(self::deposit());
-
-        // 如果不为null，就是查询某个代理会员的出金记录
-        if ($dayAgentInfo) {
-            return $dayAgentInfo->pluck('day_deposit')->sum();
-        }
 
         if ($time) {
             $deposit = $deposit->whereBetween('created_at', [

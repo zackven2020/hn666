@@ -21,16 +21,18 @@ trait AgentInfoTraits
     }
 
 
-    public static function dayAgentInfo($agentId = null, $time = true)
+    public static function dayAgentInfo($agentId = null, $time = true, $start = 0, $end = 0)
     {
         $agentInfo = collect(self::agentInfo());
 
         if ($agentId) {
-            $agentInfo->where('agent_id', $agentId);
+            $agentInfo = $agentInfo->where('agent_id', $agentId);
         }
+
         if ($time) {
-            $agentInfo->whereBetween('created_at', [getDayStartDate(), getDayEndDate()]);
+            $agentInfo = $agentInfo->whereBetween('created_at', [getDayStartDate($start), getDayEndDate($end)]);
         }
+
         return $agentInfo;
     }
 

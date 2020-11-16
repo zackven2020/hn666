@@ -29,14 +29,9 @@ trait WithdrawTraits
      * @param null $time          是否查询当天数据
      * @return mixed
      */
-    public static function todayWithdraw($dayAgentInfo = null, $time = null)
+    public static function todayWithdraw($time = null)
     {
         $withdraw = collect(self::withdraw());
-
-        // 如果不为null，就是查询某个代理会员的出金记录
-        if ($dayAgentInfo) {
-            return $dayAgentInfo->pluck('day_deposit')->sum();
-        }
 
         if ($time) {
             $withdraw = $withdraw->whereBetween('created_at', [

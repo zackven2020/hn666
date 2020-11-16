@@ -35,7 +35,7 @@ class OrderController extends BaseController
         ]);*/
         //$order = $this->model->create($request->post());
         $data = $request->post();
-        return response()->json(['code' => 200,'message' => '红牛彩票提供','data' => $data]);
+        return response()->success('红牛彩票提供',$data);
     }
     
     /**
