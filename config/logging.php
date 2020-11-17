@@ -40,7 +40,11 @@ return [
             'channels' => ['single'],
             'ignore_exceptions' => false,
         ],
-
+        'command' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/command/command.log'),
+            'level' => 'info',
+        ],
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),

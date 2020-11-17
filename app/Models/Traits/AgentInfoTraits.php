@@ -13,7 +13,6 @@ trait AgentInfoTraits
     protected static $times_key    = '60';
 
 
-
     public function agentInfo()
     {
         return Cache::remember(self::$withdraw_key, self::$times_key, function(){

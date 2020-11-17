@@ -39,10 +39,11 @@
 * game_list.api_status          是否开启
 * game_list.frequency           频率
 
+
 #11.17
 ##### 新增数据库字段
 * withdraw.money_type     默认1，出金类型(1正常出金，2测试出金)
-* deposit.money_type      默认1，出金类型(1正常出金，2测试出金)
+* deposit.money_type      默认1，入金类型(1正常出金，2测试出金)
 
 
 

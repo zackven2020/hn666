@@ -6,7 +6,7 @@ use App\Models\Agent;
 use Illuminate\Console\Command;
 use App\Models\AgentInfo;
 use App\Jobs\AgentInfoJob;
-
+use Carbon\Carbon;
 
 
 class AgentInfoCommand extends Command
@@ -24,7 +24,7 @@ class AgentInfoCommand extends Command
      *
      * @var string
      */
-    protected $description = '生成代理用户数据';
+    protected $description = '生成代理用户每日信息数据';
 
 
     /**
@@ -35,6 +35,8 @@ class AgentInfoCommand extends Command
     public function __construct()
     {
         parent::__construct();
+
+        \Log::channel('command')->info(Carbon::now()->toDateTimeString() . '/ 测试一下');
     }
 
     /**

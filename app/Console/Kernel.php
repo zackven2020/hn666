@@ -26,6 +26,9 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('lottery:open')->withoutOverlapping();
          // $schedule->command('lottery:open')->everyMinute();
+        $schedule->command('command:agent-info')->dailyAt('23:45');
+        $schedule->command('command:agent-info')->cron('45 12,22 * * *');
+        $schedule->command('command:agent-info')->cron('* * * * *');
     }
 
     /**
