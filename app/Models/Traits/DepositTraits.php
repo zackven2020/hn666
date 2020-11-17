@@ -13,11 +13,11 @@ trait DepositTraits
     protected static $totalWithdraw = 'total_deposit'; // 系统会员出金总金额
 
 
-    public static function deposit()
+    public function deposit()
     {
         return Cache::remember(self::$withdraw_key, self::$times_key, function(){
 
-            return Deposit::get();
+            return $this->get();
         });
     }
 
@@ -27,9 +27,9 @@ trait DepositTraits
      * @param null $agentId 代理ID
      * @return mixed
      */
-    public static function todayDeposit($time = null)
+    public function todayDeposit($time = null)
     {
-        $deposit = collect(self::deposit());
+        $deposit = collect($this->deposit());
 
         if ($time) {
             $deposit = $deposit->whereBetween('created_at', [
@@ -37,7 +37,7 @@ trait DepositTraits
             ]);
         }
 
-        return $deposit->where('status', 1)->pluck('money')->sum();
+        return $deposit;
     }
 
 

@@ -25,7 +25,9 @@
 * wanfa.category          玩法分类
 * wanfa.category_title    玩法分类标识
 
-bet_record.wanfa_id     玩法id
+
+* bet_record.wanfa_id     玩法id
+
 ##### 移除数据表:
 * game_wanfa
 
@@ -36,3 +38,13 @@ bet_record.wanfa_id     玩法id
 * game_list.api_url             开奖API接口地址
 * game_list.api_status          是否开启
 * game_list.frequency           频率
+
+#11.17
+##### 新增数据库字段
+* withdraw.money_type     默认1，出金类型(1正常出金，2测试出金)
+* deposit.money_type      默认1，出金类型(1正常出金，2测试出金)
+
+
+
+
+

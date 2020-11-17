@@ -24,15 +24,16 @@ class AgentDetailsModal extends LazyRenderable
         $agentAll = getAgentCache();
 
         // 所有会员帐号
-        $memberAll = getMemberCache();
+        $memberAll = Member::make()->member(); // 所有会员
 
         //今日充值
         $dayDeposit = Cache::remember('deposit_cache', 60, function(){
-            return Deposit::whereBetween('created_at',  [
+            return Deposit::whereBetween('created_at', [
                 Carbon::now()->toDateString(),
                 Carbon::now()->toDateTimeString()
             ])->get();
         });
+
 
         //今日出金
         $dayWithdraw = Cache::remember('withdraw_cache', 60, function(){

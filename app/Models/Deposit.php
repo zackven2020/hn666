@@ -6,10 +6,12 @@ use Dcat\Admin\Traits\HasDateTimeFormatter;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use App\Models\Traits\DepositTraits;
+
 
 class Deposit extends Model
 {
-	use HasDateTimeFormatter;
+	use HasDateTimeFormatter, DepositTraits;
     use SoftDeletes;
 
     protected $table = 'deposit';

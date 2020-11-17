@@ -14,10 +14,10 @@ trait AgentInfoTraits
 
 
 
-    public static function agentInfo()
+    public function agentInfo()
     {
         return Cache::remember(self::$withdraw_key, self::$times_key, function(){
-            return AgentInfo::get();
+            return $this->get();
         });
     }
 
@@ -30,9 +30,9 @@ trait AgentInfoTraits
      * @param int $end       结束时间，当天前进多少天，0为当天 23:59:59
      * @return \Illuminate\Support\Collection|\Tightenco\Collect\Support\Collection
      */
-    public static function dayAgentInfo($agentId = null, $time = true, $start = 0, $end = 0)
+    public function dayAgentInfo($agentId = null, $time = true, $start = 0, $end = 0)
     {
-        $agentInfo = collect(self::agentInfo());
+        $agentInfo = collect($this->agentInfo());
 
         if ($agentId) {
             $agentInfo = $agentInfo->where('agent_id', $agentId);

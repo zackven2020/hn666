@@ -5,10 +5,14 @@ namespace App\Models;
 use Dcat\Admin\Traits\HasDateTimeFormatter;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use App\Models\Traits\MemberTraits;
+
+
 
 class Member extends Authenticatable implements JWTSubject
 {
-    use HasDateTimeFormatter;
+    use HasDateTimeFormatter, MemberTraits;
+
     protected $table = 'member';
 
     protected $fillable = [

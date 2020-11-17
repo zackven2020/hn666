@@ -2,9 +2,7 @@
 
 namespace App\Models\Traits;
 
-use App\Models\Withdraw as BaseWithdraw;
 use Cache;
-use phpDocumentor\Reflection\Types\Collection;
 
 
 trait WithdrawTraits
@@ -14,11 +12,11 @@ trait WithdrawTraits
     protected static $totalWithdraw = 'total_withdraw'; // 系统会员出金总金额
 
 
-    public static function withdraw()
+    public function withdraw()
     {
         return Cache::remember(self::$withdraw_key, self::$times_key, function(){
 
-            return BaseWithdraw::get();
+            return $this->get();
         });
     }
 
@@ -29,9 +27,9 @@ trait WithdrawTraits
      * @param null $time          是否查询当天数据
      * @return mixed
      */
-    public static function todayWithdraw($time = null)
+    public function todayWithdraw($time = null)
     {
-        $withdraw = collect(self::withdraw());
+        $withdraw = collect($this->withdraw());
 
         if ($time) {
             $withdraw = $withdraw->whereBetween('created_at', [
@@ -39,7 +37,7 @@ trait WithdrawTraits
             ]);
         }
 
-        return $withdraw->where('status', 1)->pluck('money')->sum();
+        return $withdraw;
     }
 
 

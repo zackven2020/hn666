@@ -9,7 +9,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-
+use App\Models\Member;
+use App\Models\Deposit;
+use App\Models\Withdraw;
 
 
 
@@ -38,23 +40,48 @@ class AgentInfoJob implements ShouldQueue
      */
     public function handle()
     {
-
         $result = $this->agent->agentInfo()->whereBetween('created_at', [
             getDayStartDate(), getDayEndDate()
         ])->first();
 
-        if ($result) {
-            $agentInfo = $this->agent->agentInfo()->make([
-                'day_deposit'=> 1,
-                'day_withdraw'=> 1,
-                'win_and_lose'=> 1,
-                'day_agent'=> 1,
-                'day_member'=> 1,
-                'day_total_member'=> 1,
-            ]);
+        if (!$result) {
+            $agentInfo = $this->agent->agentInfo()->make($this->handleData());
             $agentInfo->agent()->associate($this->agent);
             $agentInfo->save();
+        }else{
+            $result->update($this->handleData());
         }
-        //
+    }
+
+
+
+    public function handleData()
+    {
+        $memberId = Member::make()->getMemberId($this->agent->id);
+        // 代理会员当天存款
+        $deposit  = Deposit::make()->todayDeposit(true)->whereIn('user_id', $memberId->pluck('id'))->where('status', 1)
+                    ->where('money_type', 1)->sum('money');
+        // 代理会员当天出金
+        $withdraw  = Withdraw::todayWithdraw(true)->whereIn('user_id', $memberId->pluck('id'))->where('status', 1)
+                    ->where('money_type', 1)->sum('money');
+        // 当天赢亏
+        $day_withdraw = $withdraw - $withdraw;
+        // 代理今日 下级升代理
+        $dayAgent = $this->agent->childrenModule()->whereBetween('created_at', [
+            getDayStartDate(), getDayEndDate()
+        ])->count();
+        // 代理今日直推会员
+        $dayMember = $this->agent->member()->whereBetween('created_at', [
+            getDayStartDate(), getDayEndDate()
+        ])->count();
+
+        return [
+            'day_deposit'   => $deposit,
+            'day_withdraw'  => $withdraw,
+            'win_and_lose'  => $day_withdraw,
+            'day_agent'     => $dayAgent,
+            'day_member'    => $dayMember,
+            'day_total_member'=> $memberId->count(),
+        ];
     }
 }

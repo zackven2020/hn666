@@ -44,12 +44,12 @@ class AgentController extends AdminController
             });
 
             $grid->column('team', '团队人数')->display(function ($value) {
+
                 $agentAll = Cache::remember('agent_cache', 20, function(){
                     return $this->all();
                 });
-                $memberAll = Cache::remember('member_cache', 20, function(){
-                    return Member::all();
-                });
+                $memberAll = (new Member())->todayMember(); // 所有会员
+
                 return collect($memberAll)->whereIn('agent_id', getMemberTeamId($agentAll, $this->id))->count();
             });
 

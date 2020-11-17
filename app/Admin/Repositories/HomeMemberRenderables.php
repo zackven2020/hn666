@@ -9,11 +9,9 @@
 namespace App\Admin\Repositories;
 
 use Illuminate\Contracts\Support\Renderable;
-use App\Models\Traits\DepositTraits;
-use App\Models\Traits\WithdrawTraits;
-use App\Models\Traits\MemberTraits;
-use App\Models\Traits\AgentInfoTraits;
-
+use App\Models\Member;
+use App\Models\Deposit;
+use App\Models\Withdraw;
 
 
 
@@ -33,43 +31,48 @@ class HomeMemberRenderables implements Renderable
      */
     public function data()
     {
-        // 系统会员今日出金
-        if (! verifSysCacheArray('day_withdraw')) { //判断有没有对应出金缓存
-            $totalWithdraw = setSysCacheArray([
-                'day_withdraw' => AgentInfoTraits::dayAgentInfo(null, false)->sum('day_withdraw')
-            ]);// 存入缓存
-        }
-
-        // 系统会员总出金
-        if (! verifSysCacheArray('total_withdraw')) { //判断有没有对应出金缓存
-            $totalWithdraw = setSysCacheArray([
-                'total_withdraw' => WithdrawTraits::todayWithdraw()
-            ]);// 存入缓存
-        }
-
-        // 系统会员总入金
+        // 系统总入金
         if (! verifSysCacheArray('total_deposit')) { //判断有没有对应出金缓存
             $totalWithdraw = setSysCacheArray([
-                'total_deposit' => DepositTraits::todayDeposit()
+                'total_deposit' => (new Deposit())->todayDeposit()->where('status', 1)
+                                    ->where('money_type', 1)->pluck('money')->sum()
             ]);// 存入缓存
         }
 
-        // 系统会员今日入金
-        if (! verifSysCacheArray('day_deposit')) { //判断有没有对应出金缓存
+        // 系统总出金
+        if (! verifSysCacheArray('total_withdraw')) { //判断有没有对应出金缓存
             $totalWithdraw = setSysCacheArray([
-                'day_deposit' => AgentInfoTraits::dayAgentInfo(null, false)->sum('day_deposit')
+                'total_withdraw' => (new Withdraw())->todayWithdraw()->where('status', 1)
+                                    ->where('money_type', 1)->pluck('money')->sum()
             ]);// 存入缓存
         }
+
+        // 系统今日入金
+        if (! verifSysCacheArray('day_deposit')) { //判断有没有对应出金缓存
+            $totalWithdraw = setSysCacheArray([
+                'day_deposit' => (new Deposit())->todayDeposit(true)->where('status', 1)
+                                    ->where('money_type', 1)->pluck('money')->sum()
+            ]);// 存入缓存
+
+        }
+        // 系统今日出金
+        if (! verifSysCacheArray('day_withdraw')) { //判断有没有对应出金缓存
+            $totalWithdraw = setSysCacheArray([
+                'day_withdraw' => (new Withdraw())->todayWithdraw(true)->where('status', 1)
+                                    ->where('money_type', 1)->pluck('money')->sum()
+            ]);// 存入缓存
+        }
+
         // 系统会员总数
         if (! verifSysCacheArray('total_member')) { //判断有没有对应出金缓存
             $totalWithdraw = setSysCacheArray([
-                'total_member' => MemberTraits::todayMember()
+                'total_member' => (new Member())->todayMember()->count()
             ]);// 存入缓存
         }
         // 系统会员今日注册
         if (!$totalWithdraw = verifSysCacheArray('day_member')) { //判断有没有对应出金缓存
-            $totalWithdraw = setSysCacheArray([
-                'day_member' => MemberTraits::todayMember(true)
+            $totalWithdraw  = setSysCacheArray([
+                'day_member' => (new Member())->todayMember(true)->count()
             ]);// 存入缓存
         }
 

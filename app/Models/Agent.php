@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Agent extends Model
 {
-	use HasDateTimeFormatter,ModelTree;
+	use HasDateTimeFormatter, ModelTree;
 
     protected $table = 'agent';
 

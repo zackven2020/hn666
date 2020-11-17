@@ -4,12 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Traits\AgentInfoTraits;
+
+
 
 class AgentInfo extends Model
 {
-    use HasFactory;
+    use HasFactory, AgentInfoTraits;
+
 
     protected $table = 'agent_info';
+
 
     protected $fillable = [
         'day_deposit','day_withdraw','win_and_lose','day_agent',

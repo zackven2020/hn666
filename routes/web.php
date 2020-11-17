@@ -21,6 +21,8 @@ use App\Models\Traits\WithdrawTraits;
 
 Route::get('/', function ($id = 2) {
 
+    dd(Deposit::make()->todayDeposit(), (new Deposit())->todayDeposit());
+
     dd('fdsafdsafds');
     $a = ['a'=>123];
 
