@@ -59,10 +59,10 @@ class AgentInfoJob implements ShouldQueue
     {
         $memberId = Member::make()->getMemberId($this->agent->id);
         // 代理会员当天存款
-        $deposit  = Deposit::make()->todayDeposit(true)->whereIn('user_id', $memberId->pluck('id'))->where('status', 1)
+        $deposit  = (new Deposit())->todayDeposit(true)->whereIn('user_id', $memberId->pluck('id'))->where('status', 1)
                     ->where('money_type', 1)->sum('money');
         // 代理会员当天出金
-        $withdraw  = Withdraw::todayWithdraw(true)->whereIn('user_id', $memberId->pluck('id'))->where('status', 1)
+        $withdraw  = (new Withdraw())->todayWithdraw(true)->whereIn('user_id', $memberId->pluck('id'))->where('status', 1)
                     ->where('money_type', 1)->sum('money');
         // 当天赢亏
         $day_withdraw = $withdraw - $withdraw;

@@ -9,6 +9,7 @@ use App\Jobs\AgentInfoJob;
 use Carbon\Carbon;
 
 
+
 class AgentInfoCommand extends Command
 {
     /**
