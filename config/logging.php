@@ -41,9 +41,10 @@ return [
             'ignore_exceptions' => false,
         ],
         'command' => [
-            'driver' => 'single',
+            'driver' => 'daily',
             'path' => storage_path('logs/command/command.log'),
             'level' => 'info',
+            'days' => 30,
         ],
         'single' => [
             'driver' => 'single',
