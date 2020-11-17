@@ -37,7 +37,6 @@ class AgentInfoCommand extends Command
     {
         parent::__construct();
 
-        \Log::channel('command')->info(Carbon::now()->toDateTimeString() . '/ 测试一下');
     }
 
     /**
@@ -47,6 +46,7 @@ class AgentInfoCommand extends Command
      */
     public function handle()
     {
+        \Log::channel('command')->info(Carbon::now()->toDateTimeString() . '/ 测试一下');
         $Agent = Agent::query()->get();
         foreach ($Agent as $k=>$v) {
             dispatch(new AgentInfoJob($v))->onQueue('agent_info_job');

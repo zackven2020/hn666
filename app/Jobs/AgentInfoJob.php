@@ -57,7 +57,7 @@ class AgentInfoJob implements ShouldQueue
 
     public function handleData()
     {
-        $memberId = Member::make()->getMemberId($this->agent->id);
+        $memberId = (new Member())->getMemberId($this->agent->id);
         // 代理会员当天存款
         $deposit  = (new Deposit())->todayDeposit(true)->whereIn('user_id', $memberId->pluck('id'))->where('status', 1)
                     ->where('money_type', 1)->sum('money');
